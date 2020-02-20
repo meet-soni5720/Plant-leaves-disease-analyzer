@@ -1,0 +1,39 @@
+{% extends 'predict/base.html' %}
+{% load staticfiles %}
+{% block head_block %}
+<script type="text/javascript">
+    window.onload = function() {
+       var a=document.getElementsByClassName("container_bar")[0];
+       var b=document.getElementsByClassName("p_change")[0];
+       var c=document.getElementsByClassName("name")[0];
+
+  let root = document.documentElement;
+  root.style.setProperty('--pred',a.getAttribute("data-pred"));
+  b.innerHTML=a.getAttribute("data-pred");
+  c.innerHTML=a.getAttribute("data-class");
+}
+</script>
+{% endblock %}
+{% block body_block %}
+<div style="border: 1px solid black; background-color:palegreen; margin-top: 50px; background-color: rgba(0,0,0,0.3);background-blend-mode: lighten !important" class="jumbotron">
+  <div class = "row">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class = "form-group">
+       {{ form.as_p }}
+    <input type="submit" value="submit" class = "btn btn-primary">
+  </div>
+  </form>
+</div>
+  </div>
+   {% if disease_value %}
+    <div class="container_bar" data-pred="{{ probability }}" data-class="{{ disease_value }}">
+      <img class = "image_display" src = "{{ plant_show.Image.url }}"  alt="leave_image">
+    <div class = "name"> {{disease_value}} </div>
+    <div class="bar">
+  <div class="p_change" style="width: var(--pred);">
+</div>
+</div>
+  </div>
+  {% endif %}
+{% endblock %}
