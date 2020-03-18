@@ -1,0 +1,210 @@
+body{
+  background: url("/static/Images/Home_background.jpg") center no-repeat fixed;
+  background-size: cover;
+
+  z-index:-1;
+  font-family: 'Lobster', cursive;
+  background-size: cover;
+  background-color: rgba(255,255,255,0.3);
+  background-blend-mode: lighten;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.6); /*	mediumspringgreen */
+  padding-left: 10%;
+  z-index: 999;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 20px 25px;
+  text-decoration: none;
+}
+
+li a:hover
+    {
+      background-color: black;
+      color:white;
+      text-decoration: none;
+    }
+
+    .active_nav{
+      background-color: #2E8B57;
+      width: 100px;
+      text-align: center;
+      color:black;
+    }
+    .active_nav:hover{
+      background-color: #3CB371;
+      color: green;
+    }
+    select{
+      width: 50%;
+      height : 30px;
+      margin-left: 25%;
+      display:block;
+      border: 2px solid white;
+      border-radius: 7px;
+      background-color: #8842d5;
+      color:white;
+    }
+    input[type = file]{
+        content: 'Select some files';
+        display: block;
+        margin-left: 25%;
+        background: #8842d5;
+        border: 2px solid white;
+        border-radius: 7px;
+        padding: 10px 70px;
+        outline: none;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        cursor: grab;
+        text-shadow: 1px 1px #fff;
+        font-weight: 700;
+        font-size: 10pt;
+        width: 50%;
+    }
+    input[type=button], input[type=reset], input[type=submit] {
+        background-color: #8842d5;
+        border: 2px solid white;
+        color: white;
+        padding: 12px 36px;
+        text-decoration: none;
+        margin: 5px 4px;
+        cursor: pointer;
+        width: 60%;
+        margin-left: 20%;
+        margin-top: 50px;
+    }
+    label{
+      font-family:'Lobster', cursive;
+      margin-left: 25%;
+      display: block;
+      color: white;
+      height: 20px;
+    }
+    
+    :root{
+     --pred:0%;
+    }
+    
+     .container_bar{
+     height: fit-content;
+     background: #556B2F;
+     width: 100%;
+     opacity: 1;
+     padding: 5%;
+     border-radius: 10px;
+     padding-bottom: 100px;
+     }
+    
+     .p_change{
+         background-color: brown;
+         height: 30px;
+         border-radius: 10px;
+         text-align: center;
+         transition: width 2s;
+     }
+     .name{
+       color : brown;
+       font-style: bold;
+       background-color: yellow;
+       text-align: center;
+       font-family: fantasy;
+     }
+    .bar{
+      border-radius: 10px;
+      width: 100%;
+      height: 20px;
+      margin-top: 12px;
+      background: white;
+      color: white;
+      text-align: center;
+    }
+    .carousel_mine{
+       height : 30%;
+       width : 90%;
+       margin-top: 100px;
+       margin-left: 50px;
+    }
+    .p_c_v{
+      color: white;
+      font-style: bold;
+      background-color: black;
+    }
+    .heading{
+      text-align: center;
+    }
+    .image_display{
+      height: 200px;
+      width: 200px;
+      margin: 20px;
+    }
+  
+    .from-group{
+      width:5px;
+    }
+    form{
+      width:100%;
+    }
+
+.slidecontainer {
+  width: 70%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+/* .my_slider{
+  color:black;
+  background-color: white;
+  z-index: 1;
+  text-align: left;
+  float: left;
+  margin-right: 70%;
+} */
