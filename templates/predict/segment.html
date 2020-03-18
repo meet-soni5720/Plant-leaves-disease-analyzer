@@ -1,0 +1,106 @@
+{% extends 'predict/base.html' %}
+{% load staticfiles %}
+{% block body_block %}
+
+<form id="segment_form" method="post"  enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ segment_form.as_p }}
+  <input type="submit" value="submit" name="submit" class = "btn btn-primary">
+</form>
+<div id = "img_jugad">
+  {% if image_show.Image %}
+  <img src = "{{ image_show.Image.url }}" alt="plant image" style="float:right; width:150px; height:150px; margin-top: 200px;" id="seg_image">
+  {% endif %}
+</div>
+<div style="border: 1px solid black; background-color:palegreen; margin-top: 50px; background-color: rgba(0,0,0,0.3);background-blend-mode: lighten !important" class="jumbotron">
+<div class = "slidecontainer">
+<label for="myRangeHl" >Hue(lower bound):<span id="hue_l_op">0</span></label>
+<input type="range" min="0" max="255" value="0" class="slider" id="myRangeHl"><br><br>
+<label for="myRangeSl" >Saturation(lower bound): <span id="saturation_l_op">10</span></label>
+<input type="range" min="0" max="255" value="10" class="slider" id="myRangeSl"><br><br>
+<label for="myRangeVl" >value(lower bound): <span id="value_l_op">36</span></label>
+<input type="range" min="0" max="255" value="36" class="slider" id="myRangeVl"><br><br>
+<label for="myRangeHh">Hue(upper bound): <span id="hue_h_op">100</span></label>
+<input type="range" min="0" max="255" value="100" class="slider" id="myRangeHh" ><br><br>
+<label for="myRangeSh" >Saturation(upper bound): <span id="saturation_h_op">255</span></label>
+<input type="range" min="0" max="255" value="255" class="slider" id="myRangeSh"><br><br>
+<label for="myRangeVh" >Value(upper bound):<span id="value_h_op">255</span></label>
+<input type="range" min="0" max="255" value="255" class="slider" id="myRangeVh"><br><br>
+<button type="button" class="btn-primary" onclick="window.location.href=window.location.href" style="width:300px;height:30px;margin-top:30px;margin-left: 50px;margin-bottom: 5%;">SAVE IT!</button>
+</div>
+</div>
+<div style="border: 1px solid black; background-color:palegreen; margin-top: 50px; background-color: rgba(0,0,0,0.3);background-blend-mode: lighten !important" class="jumbotron">
+<form method ="POST">
+   {% csrf_token %}
+   {{ temp_form.as_p }}
+  <input type="submit" value="Predict" name="predict" class = "btn btn-primary">
+</form> 
+  {% if disease_value %}
+  <p> {{ disease_value}} </p>
+  {% endif %}
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+function refreshImage(imgElement,imgURL){       
+   // create a new timestamp    
+ var timestamp = new Date().getTime();        
+ var el = document.getElementById(imgElement);      
+ var queryString = "?t=" + timestamp;           
+ el.src = imgURL + queryString;  
+  }
+
+   $('.slider').change(function(e){
+     //e.preventDefault();
+      var h_v_h = document.getElementById("myRangeHh").value;
+      var s_v_h = document.getElementById('myRangeSh').value;
+      var v_v_h = document.getElementById('myRangeVh').value;
+      var h_v_l = document.getElementById("myRangeHl").value;
+      var s_v_l = document.getElementById('myRangeSl').value;
+      var v_v_l = document.getElementById('myRangeVl').value;
+
+      document.getElementById("hue_l_op").innerHTML = h_v_l;
+      document.getElementById("saturation_l_op").innerHTML = s_v_l;
+      document.getElementById("value_l_op").innerHTML = v_v_l;
+      document.getElementById("hue_h_op").innerHTML = h_v_h;
+      document.getElementById("saturation_h_op").innerHTML = s_v_h;
+      document.getElementById("value_h_op").innerHTML = v_v_h;
+
+      console.log('Inside the function!')
+      $.ajax({
+        method : 'GET',
+        url: '{% url "predict:segment" %}',
+        data: {
+          'h_value_h' : h_v_h,
+          's_value_h' : s_v_h,
+          'v_value_h' : v_v_h,
+          'h_value_l' : h_v_l,
+          's_value_l' : s_v_l,
+          'v_value_l' : v_v_l,
+        },
+        datatype: 'json',
+        success: function(data){
+          console.log('hurrah! data is sent perfectly!');
+          console.log(data);
+          
+          refreshImage("seg_image",data);
+          //$("#seg_image").attr("src", data);
+          //$("#seg_image").remove();
+          //$("#seg_image").prepend('<img id="seg_image" src = "data" alt="plant_image" />');
+        },
+      });
+   })
+   //var img_add = "{{image_show.Image.url}}"
+  //  function change(){
+  //   $( "#seg_image" ).load("http://127.0.0.1:8000/predict/segment/");
+  //   var ch = document.getElementById("jugad").innerHTML = "{{checked}}";
+  //      document.getElementById('seg_image').src = "{{image_show.Image.url}}";
+  //       var img_src = document.getElementById("seg_image").src;
+  //       var ch = document.getElementById("jugad").innerHTML;
+        
+  //       $('#seg_image').remove();
+  //       $('#img_jugad').prepend('<img id="seg_image" src = {{image_show.Image.url}} />');
+  //  }
+    </script>
+
+  {% endblock %}
