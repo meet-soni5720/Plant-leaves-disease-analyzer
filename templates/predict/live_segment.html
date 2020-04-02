@@ -1,0 +1,77 @@
+{% extends 'predict/base.html' %}
+{% block body_block %}
+<form method = "post" enctype="multipart/form-data"> 
+    {% csrf_token %} 
+    <input type="Submit" name="submit" value="Submit"/>
+</form> 
+{% if not submitbutton %}
+<img src="{% url 'predict:live' %}" alt="frames" id="live_frame">
+{% endif %}
+
+<div class = "slidecontainer">
+    <label for="myRangeHl" >Hue(lower bound):<span id="hue_l_op">0</span></label>
+    <input type="range" min="0" max="255" value="0" class="slider" id="myRangeHl"><br><br>
+    <label for="myRangeSl" >Saturation(lower bound): <span id="saturation_l_op">10</span></label>
+    <input type="range" min="0" max="255" value="10" class="slider" id="myRangeSl"><br><br>
+    <label for="myRangeVl" >value(lower bound): <span id="value_l_op">36</span></label>
+    <input type="range" min="0" max="255" value="36" class="slider" id="myRangeVl"><br><br>
+    <label for="myRangeHh">Hue(upper bound): <span id="hue_h_op">100</span></label>
+    <input type="range" min="0" max="255" value="100" class="slider" id="myRangeHh" ><br><br>
+    <label for="myRangeSh" >Saturation(upper bound): <span id="saturation_h_op">255</span></label>
+    <input type="range" min="0" max="255" value="255" class="slider" id="myRangeSh"><br><br>
+    <label for="myRangeVh" >Value(upper bound):<span id="value_h_op">255</span></label>
+    <input type="range" min="0" max="255" value="255" class="slider" id="myRangeVh"><br><br>
+    <button type="button" class="btn-primary" onclick="window.location.href=window.location.href" style="width:300px;height:30px;margin-top:30px;margin-left: 50px;margin-bottom: 5%;">SAVE IT!</button>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+function refreshImage(imgElement,imgURL){       
+   // create a new timestamp    
+ var timestamp = new Date().getTime();        
+ var el = document.getElementById(imgElement);      
+ var queryString = "?t=" + timestamp;           
+ el.src = imgURL + queryString;  
+  }
+
+   $('.slider').on("input",function(e){
+     //e.preventDefault();
+      var h_v_h = document.getElementById("myRangeHh").value;
+      var s_v_h = document.getElementById('myRangeSh').value;
+      var v_v_h = document.getElementById('myRangeVh').value;
+      var h_v_l = document.getElementById("myRangeHl").value;
+      var s_v_l = document.getElementById('myRangeSl').value;
+      var v_v_l = document.getElementById('myRangeVl').value;
+
+      document.getElementById("hue_l_op").innerHTML = h_v_l;
+      document.getElementById("saturation_l_op").innerHTML = s_v_l;
+      document.getElementById("value_l_op").innerHTML = v_v_l;
+      document.getElementById("hue_h_op").innerHTML = h_v_h;
+      document.getElementById("saturation_h_op").innerHTML = s_v_h;
+      document.getElementById("value_h_op").innerHTML = v_v_h;
+
+      console.log('Inside the function!')
+      $.ajax({
+        method : 'GET',
+        url: '{% url "predict:live" %}',
+        data: {
+          'h_value_h' : h_v_h,
+          's_value_h' : s_v_h,
+          'v_value_h' : v_v_h,
+          'h_value_l' : h_v_l,
+          's_value_l' : s_v_l,
+          'v_value_l' : v_v_l,
+        },
+        datatype: 'json',
+        success: function(data){
+          console.log('hurrah! data is sent perfectly!');
+        //   console.log(data);
+          
+        //   refreshImage("seg_image",data);
+        },
+      });
+   })
+  
+    </script>
+{% endblock %}
