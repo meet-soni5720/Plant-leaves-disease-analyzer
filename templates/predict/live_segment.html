@@ -4,7 +4,7 @@
     {% csrf_token %} 
     <input type="Submit" name="submit" value="Submit"/>
 </form> 
-{% if not submitbutton %}
+{% if showFrames %}
 <img src="{% url 'predict:live' %}" alt="frames" id="live_frame">
 {% endif %}
 
@@ -27,15 +27,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-function refreshImage(imgElement,imgURL){       
-   // create a new timestamp    
- var timestamp = new Date().getTime();        
- var el = document.getElementById(imgElement);      
- var queryString = "?t=" + timestamp;           
- el.src = imgURL + queryString;  
-  }
-
-   $('.slider').on("input",function(e){
+   $('.slider').on("change",function(e){
      //e.preventDefault();
       var h_v_h = document.getElementById("myRangeHh").value;
       var s_v_h = document.getElementById('myRangeSh').value;

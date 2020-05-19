@@ -5,26 +5,60 @@
     <meta charset="utf-8">
     <title>Welcome to the planet website!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Francois+One|Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static "css/index.css" %}">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     {% block head_block %}
     {% endblock %}
   </head>
   <body>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <nav>
         <ul>
+          <img src="{% static 'images/apple-touch-icon.png' %}" alt="Website logo" style="float:left; height:100px; width:100px; margin-right: 50px;">
           <li ><a class = "active_nav" href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'admin:index' %}">Admin</a></li>
           <li><a href="{% url 'predict:form' %}">Predict Disease</a></li>
+          <li><a href="{% url 'predict:segment' %}">Know your Plant!</a></li>
         </ul>
     </nav>
-    {% block courosel_block %}
-    {% endblock %}
     <div class = "container">
       {%block body_block %}
       {% endblock %}
     </div>
+
+    <footer class="page-footer font-small stylish-color-dark pt-4">
+      <div class="container text-center text-md-left">
+          <h1 class="text-center"> connect with us:</h1>
+        <ul class="list-unstyled list-inline text-center fclass">
+          <li class="list-inline-item lclass" style="margin-left: 25% !important;">
+            <a href = "https://www.facebook.com/drishti.nitsurat/">
+              <i class="fa fa-facebook"> </i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://github.com/shubhi0168/PLANet-Plant-Leaf-Analyser-Network-">
+              <i class="fa fa-github"> </i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.instagram.com/drishti.svnit/?hl=en">
+              <i class="fa fa-instagram"> </i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="mailto:drishtiinfo.nitsurat@gmail.com">
+              <i class="fa fa-envelope"> </i>
+            </a>
+          </li>
+        </ul>
+        <div class="footer-copyright text-center py-3"><h3>© 2020 Copyright: Drishti-A Revolutionary Concept</h3>
+        </div>
+      </div>
+      </footer>
   </body>
 </html>

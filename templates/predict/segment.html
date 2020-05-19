@@ -32,11 +32,15 @@
 <div style="border: 1px solid black; background-color:palegreen; margin-top: 50px; background-color: rgba(0,0,0,0.3);background-blend-mode: lighten !important" class="jumbotron">
 <form method ="POST">
    {% csrf_token %}
-   {{ temp_form.as_p }}
+   <!-- {{ temp_form.as_p }} -->
+  <input type="submit" value="download" name="download" class = "btn btn-success">
   <input type="submit" value="Predict" name="predict" class = "btn btn-primary">
 </form> 
   {% if disease_value %}
-  <p> {{ disease_value}} </p>
+  <div class="container_bar" data-pred="{{ probability }}" data-class="{{ disease_value }}">
+    <div class = "name"> {{disease_value}} </div>
+    <div class="bar">
+  <div class="p_change" style="width: var(--pred);">
   {% endif %}
 </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -50,7 +54,7 @@ function refreshImage(imgElement,imgURL){
  el.src = imgURL + queryString;  
   }
 
-   $('.slider').change(function(e){
+   $('.slider').on("change",function(e){
      //e.preventDefault();
       var h_v_h = document.getElementById("myRangeHh").value;
       var s_v_h = document.getElementById('myRangeSh').value;
