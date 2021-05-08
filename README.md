@@ -12,3 +12,6 @@ Also it includes live segmentation for plants and also dataset generation in it.
 # In django dependencies:-
 1)Django-resized
 2)djagno rest_framework
+
+# If want to know about training code and methods
+<h3> visit <a href = "https://github.com/shubhi0168/PLANet-Plant-Leaf-Analyser-Network-"> training code </a> </h3>
